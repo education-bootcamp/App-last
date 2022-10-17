@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="488.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckBoxController">
+   <children>
+      <CheckBox fx:id="cbxjava" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Java">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="cbxphp" layoutX="137.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="PHP">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="cbxkotlin" layoutX="265.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Kotlin">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="cbxrooby" layoutX="397.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Rooby">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="197.0" layoutY="80.0" mnemonicParsing="false" onAction="#SaveLanguagesOnAction" text="Save Language">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="txtSaveLanguage" layoutX="25.0" layoutY="136.0" prefHeight="134.0" prefWidth="490.0" />
+      <Separator layoutX="25.0" layoutY="309.0" prefHeight="2.0" prefWidth="499.0" />
+      <RadioButton layoutX="182.0" layoutY="327.0" mnemonicParsing="false" selected="true" text="Male">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rdbFemale" layoutX="265.0" layoutY="327.0" mnemonicParsing="false" text="FeMale" toggleGroup="$gender">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="197.0" layoutY="368.0" mnemonicParsing="false" onAction="#SaveGenderOnAction" text="Save Gender">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="txtGender" layoutX="25.0" layoutY="419.0" prefHeight="30.0" prefWidth="490.0" />
+   </children>
+</AnchorPane>
