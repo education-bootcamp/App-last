@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.swing.text.html.Option;
+import javax.xml.crypto.Data;
 import java.util.Optional;
 
 
@@ -86,5 +87,33 @@ public class MainFormController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        Customer c1= new Customer(
+                txtId.getText(),txtName.getText(),txtAddress.getText(),
+                Double.parseDouble(txtSalary.getText())
+        );
+        if (btnSaveCustomer.getText().equalsIgnoreCase("Update Customer")){
+            // update
+            for (Customer c:Database.customerTable
+                 ) {
+                if (c.getId().equals(txtId.getText())){
+                    c.setName(c1.getName());
+                    c.setAddress(c1.getAddress());
+                    c.setSalary(c1.getSalary());
+                    new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
+                    loadAllCustomers();
+                }
+            }
+        }else{
+            if(Database.customerTable.add(c1)){
+                new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
+                loadAllCustomers();
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            }
+        }
+    }
+
+    public void resetButtonOnAction(ActionEvent actionEvent) {
+        btnSaveCustomer.setText("Save Customer");
     }
 }
