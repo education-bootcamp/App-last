@@ -32,6 +32,6 @@
             <TableColumn fx:id="colOption" prefWidth="121.5999755859375" text="Option" />
         </columns>
       </TableView>
-      <TextField layoutX="25.0" layoutY="119.0" prefHeight="27.0" prefWidth="353.0" promptText="search" />
+      <TextField fx:id="txtSearch" layoutX="25.0" layoutY="119.0" prefHeight="27.0" prefWidth="353.0" promptText="search" />
    </children>
 </AnchorPane>

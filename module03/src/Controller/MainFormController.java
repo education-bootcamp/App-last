@@ -26,6 +26,7 @@ public class MainFormController {
     public TextField txtAddress;
     public TextField txtSalary;
     public Button btnSaveCustomer;
+    public TextField txtSearch;
 
     public void initialize(){
 
@@ -43,9 +44,15 @@ public class MainFormController {
                 setData(newValue);
             }
         });
+
+        txtSearch.textProperty()
+                .addListener((observable, oldValue, newValue) -> {
+            loadAllCustomers(newValue);
+        });
+
         //=============
 
-        loadAllCustomers();
+        loadAllCustomers("");
     }
 
     private void setData(CustomerTM value) {
@@ -57,31 +64,37 @@ public class MainFormController {
         txtSalary.setText(String.valueOf(value.getSalary()));
     }
 
-    public void loadAllCustomers() {
+    public void loadAllCustomers(String text) {
         ObservableList<CustomerTM> tmList = FXCollections.observableArrayList();
         for(Customer c : Database.customerTable){
-            Button btn = new Button("delete");
-            CustomerTM tm = new CustomerTM( c.getId(), c.getName(), c.getAddress(), c.getSalary(), btn);
 
-            btn.setOnAction(e->{
+            if (c.getName().contains(text) || c.getAddress().contains(text)){
+                Button btn = new Button("delete");
+                CustomerTM tm = new CustomerTM( c.getId(), c.getName(), c.getAddress(), c.getSalary(), btn);
 
-                Alert alert= new Alert(Alert.AlertType.CONFIRMATION,
-                        "Are you sure whether do you want delete this customer?",
-                        ButtonType.YES, ButtonType.NO);
-                //alert.show();
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get()==ButtonType.YES){
-                    boolean isDeleted =Database.customerTable.remove(c); // collection ==> array list pre-defined method remove();
-                    if(isDeleted){
-                        new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
-                        loadAllCustomers();
-                    }else new Alert(Alert.AlertType.WARNING,"Try Again!").show();
-                }
+                btn.setOnAction(e->{
+
+                    Alert alert= new Alert(Alert.AlertType.CONFIRMATION,
+                            "Are you sure whether do you want delete this customer?",
+                            ButtonType.YES, ButtonType.NO);
+                    //alert.show();
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get()==ButtonType.YES){
+                        boolean isDeleted =Database.customerTable.remove(c); // collection ==> array list pre-defined method remove();
+                        if(isDeleted){
+                            new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
+                            loadAllCustomers("");
+                        }else new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+                    }
 
 
-            });
+                });
 
-            tmList.add(tm);
+
+                tmList.add(tm);
+            }
+
+
         }
         tblCustomers.setItems(tmList);
     }
@@ -100,13 +113,13 @@ public class MainFormController {
                     c.setAddress(c1.getAddress());
                     c.setSalary(c1.getSalary());
                     new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
-                    loadAllCustomers();
+                    loadAllCustomers("");
                 }
             }
         }else{
             if(Database.customerTable.add(c1)){
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
-                loadAllCustomers();
+                loadAllCustomers("");
             }else{
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }
