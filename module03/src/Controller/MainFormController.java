@@ -5,6 +5,7 @@ import Entity.Customer;
 import View.TM.CustomerTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -19,15 +20,40 @@ public class MainFormController {
     public TableColumn colAddress;
     public TableColumn colSalary;
     public TableColumn colOption;
+    public TextField txtId;
+    public TextField txtName;
+    public TextField txtAddress;
+    public TextField txtSalary;
+    public Button btnSaveCustomer;
 
     public void initialize(){
+
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
 
+        //=============
+        tblCustomers.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null){
+                setData(newValue);
+            }
+        });
+        //=============
+
         loadAllCustomers();
+    }
+
+    private void setData(CustomerTM value) {
+        btnSaveCustomer.setText("Update Customer");
+
+        txtId.setText(value.getId());
+        txtName.setText(value.getName());
+        txtAddress.setText(value.getAddress());
+        txtSalary.setText(String.valueOf(value.getSalary()));
     }
 
     public void loadAllCustomers() {
@@ -57,5 +83,8 @@ public class MainFormController {
             tmList.add(tm);
         }
         tblCustomers.setItems(tmList);
+    }
+
+    public void saveOnAction(ActionEvent actionEvent) {
     }
 }

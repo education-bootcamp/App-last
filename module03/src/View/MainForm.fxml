@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="393.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainFormController">
+<AnchorPane prefHeight="393.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainFormController">
    <children>
       <Label layoutX="35.0" layoutY="21.0" text="Customer form">
          <font>
@@ -19,11 +18,11 @@
       </Label>
       <Separator layoutX="25.0" layoutY="60.0" prefHeight="12.0" prefWidth="480.0" />
       <Button layoutX="454.0" layoutY="24.0" mnemonicParsing="false" text="+ New" />
-      <TextField layoutX="25.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Cus ID" />
-      <TextField layoutX="149.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Name" />
-      <TextField layoutX="273.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Address" />
-      <TextField layoutX="399.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="salary" />
-      <Button layoutX="407.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Save customer" />
+      <TextField fx:id="txtId" layoutX="25.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Cus ID" />
+      <TextField fx:id="txtName" layoutX="149.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Name" />
+      <TextField fx:id="txtAddress" layoutX="273.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="Address" />
+      <TextField fx:id="txtSalary" layoutX="399.0" layoutY="78.0" prefHeight="26.0" prefWidth="110.0" promptText="salary" />
+      <Button fx:id="btnSaveCustomer" layoutX="389.0" layoutY="119.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="27.0" prefWidth="118.0" text="Save customer" />
       <TableView fx:id="tblCustomers" layoutX="25.0" layoutY="158.0" prefHeight="200.0" prefWidth="480.0">
         <columns>
           <TableColumn fx:id="colID" prefWidth="71.20001029968262" text="customer ID" />
@@ -33,6 +32,6 @@
             <TableColumn fx:id="colOption" prefWidth="121.5999755859375" text="Option" />
         </columns>
       </TableView>
-      <TextField layoutX="25.0" layoutY="119.0" prefHeight="26.0" prefWidth="362.0" promptText="search" />
+      <TextField layoutX="25.0" layoutY="119.0" prefHeight="27.0" prefWidth="353.0" promptText="search" />
    </children>
 </AnchorPane>
