@@ -5,11 +5,11 @@ import Entity.Customer;
 import View.TM.CustomerTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 
 public class MainFormController {
@@ -37,11 +37,21 @@ public class MainFormController {
             CustomerTM tm = new CustomerTM( c.getId(), c.getName(), c.getAddress(), c.getSalary(), btn);
 
             btn.setOnAction(e->{
-                boolean isDeleted =Database.customerTable.remove(c);
-                if(isDeleted){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
-                    loadAllCustomers();
-                }else new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+
+                Alert alert= new Alert(Alert.AlertType.CONFIRMATION,
+                        "Are you sure whether do you want delete this customer?",
+                        ButtonType.YES, ButtonType.NO);
+                //alert.show();
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get()==ButtonType.YES){
+                    boolean isDeleted =Database.customerTable.remove(c); // collection ==> array list pre-defined method remove();
+                    if(isDeleted){
+                        new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
+                        loadAllCustomers();
+                    }else new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+                }
+
+
             });
 
             tmList.add(tm);
