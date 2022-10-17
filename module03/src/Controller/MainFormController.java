@@ -5,6 +5,7 @@ import Entity.Customer;
 import View.TM.CustomerTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,6 +35,15 @@ public class MainFormController {
         for(Customer c : Database.customerTable){
             Button btn = new Button("delete");
             CustomerTM tm = new CustomerTM( c.getId(), c.getName(), c.getAddress(), c.getSalary(), btn);
+
+            btn.setOnAction(e->{
+                boolean isDeleted =Database.customerTable.remove(c);
+                if(isDeleted){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
+                    loadAllCustomers();
+                }else new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+            });
+
             tmList.add(tm);
         }
         tblCustomers.setItems(tmList);
